@@ -1,3 +1,5 @@
+'use strict';
+
 require("dotenv").config();
 const SpotifyWebApi = require("spotify-web-api-node");
 const fuzz = require("fuzzball");
@@ -7,7 +9,25 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET
 });
 
-const song_name = process.argv[2];
+const args = require("minimist")(process.argv.slice(2), {
+  alias: {
+    t: 'title',
+    a: 'artist'
+  }
+});
+
+const song_name = args.t;
+const artist = args.a;
+
+const get_ratio = (t, a) => {
+  if (song_name) {
+    return fuzz.ratio(t, song_name);
+  }
+  if (artist) {
+    return fuzz.ratio(a, artist);
+  }
+  throw new Error('Pass something, stupid');
+}
 
 (async () => {
   try {
@@ -28,10 +48,12 @@ const song_name = process.argv[2];
       for (const { id: p_id, name: p_name } of playlists.body.items) {
         const tracks = await spotifyApi.getPlaylistTracks(p_id);
         for (const { track } of tracks.body.items) {
-          const ratio = fuzz.ratio(track.name, song_name);
+          const artist = track.artists[0].name;
+          const song_name = track.name;
+          const ratio = get_ratio(song_name, artist);
           if (ratio >= 80) {
             console.log("----------------------------");
-            console.log(`${track.artists[0].name} - ${track.name}`);
+            console.log(`${artist} - ${song_name}`);
             console.log("--- is on ---");
             console.log(p_name + "\n\n");
           }
