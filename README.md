@@ -9,6 +9,7 @@ Also, I'm very forgetful and sometimes people will ask me what I think of an art
 ## Prior Art
 * [Spotify API Node Wrapper](http://michaelthelin.se/spotify-web-api-node/) for easy Spotify API calls
 * [Fuzzball](https://www.npmjs.com/package/fuzzball) for easy fuzzy string matching
+* [Minimist](https://github.com/substack/minimist) for parsing incoming arguments
 
 ## Issues
 The biggest issue is that the API returns the playlists in chunks of 50, so I have to maintain some variables that update the offset and check if the API has returned anything. I'd prefer to reduce the number of calls I make and get them all at once, but that seems like it would require knowing how many playlists I have.
