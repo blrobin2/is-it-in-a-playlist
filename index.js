@@ -6,9 +6,7 @@ const spotifyApi = new (require("spotify-web-api-node"))({
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET
 });
 
-main();
-
-async function main() {
+(async () => {
   try {
     console.log("Authenticating...");
     await set_credentials();
@@ -17,7 +15,7 @@ async function main() {
   } catch (e) {
     console.error(e);
   }
-}
+})();
 
 async function set_credentials() {
   const credentials = await spotifyApi.clientCredentialsGrant();
