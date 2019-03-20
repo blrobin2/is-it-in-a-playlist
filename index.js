@@ -32,7 +32,7 @@ async function check_each_playlist_for(user_id) {
   }
 }
 
-const playlist_chunker = (user_id) => {
+const playlist_chunker = user_id => {
   function playlist_chunk_iter() {
     let length = 50;
     let offset = 0;
