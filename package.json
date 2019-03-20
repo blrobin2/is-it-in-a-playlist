@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --harmony_async_iteration index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "dotenv": "^7.0.0",
     "fuzzball": "^1.2.0",
     "minimist": "^1.2.0",
+    "p-limit": "^2.2.0",
     "spotify-web-api-node": "^4.0.0"
   }
 }
