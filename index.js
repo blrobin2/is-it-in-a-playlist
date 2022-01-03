@@ -66,7 +66,7 @@ const playlist_chunker = user_id => {
 const rate_limited_get_tracks = (rate_limit => {
   const limit = require("p-limit")(rate_limit);
   return (id, name) => limit(() => get_tracks(id, name));
-})(5);
+})(1);
 
 async function get_tracks(playlist_id, playlist_name) {
   const tracks = await spotifyApi.getPlaylistTracks(playlist_id);
